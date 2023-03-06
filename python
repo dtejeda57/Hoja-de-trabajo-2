@@ -1,0 +1,171 @@
+### Programa en Python que reciba de parámetro un número de segundos y que despliegue en pantalla, las horas, minutos y segundos que representan.
+
+segundos=input("Ingrese una cantidad de segundos :")
+segundos=int(segundos)
+horas=segundos //3600
+sobrante1=segundos%3600
+minutos=sobrante1//60
+sobrante2=sobrante1%60
+print("Horas: ", horas, " minutos: ", minutos," segundos: ", sobrante2)
+
+### Haga una función en Python que dado un número entre 1 y 20. Y un carácter cualquiera despliegue cuatro patrones triangulares.
+def figura_geometrica(num, char):
+    if num < 1 or num > 20:
+        print("El número debe estar entre 1 y 20.")
+        return
+    for i in range(num):
+        print(char * (i+1))
+    print()
+    for i in range(num):
+        print(' ' * i + char * (num-i))
+    print()
+    for i in range(4):
+        print(' ' * (num-i-1) + char * (2*i+1))
+    print()
+    for i in range(num):
+        print(' ' * (num-i-1) + char * (i+1))
+        
+        
+
+numero = int(input("Ingrese un numero en el rango (1-20): "))
+simbolo = input ("Ingresar simbolo: ")
+
+figura_geometrica(numero, simbolo)
+
+### Haga un programa en Python que la fecha de nacimiento de una persona (puede ingresar por separado cada valor, es decir pedir primero día, luego mes y luego año), despliegue la edad de la persona en años, meses y días. Su resultado puede ser aproximado.
+from datetime import datetime
+
+def calcular_fecha(dia, mes, año):
+    fecha_nacimiento = datetime(año, mes, dia)
+    fecha_actual = datetime.now()
+    edad = fecha_actual - fecha_nacimiento
+    años = edad.days // 365
+    meses = (edad.days % 365) // 30
+    dias = (edad.days % 365) % 30
+    print(f"Tienes {años} años, {meses} meses y {dias} días.")
+
+dia = int(input("Ingrese el dia: "))
+mes = int(input("Ingrese el mes: "))
+año = int(input("Ingrese el año: "))
+
+calcular_fecha(dia,mes,año)
+
+
+### Escriba una funcion en Python que dada una tupla de elementos (numeros o letras) esta se convierta a un string
+tup = (1, 2, 3)
+ 
+s = ''.join(map(str, tup))
+print( s ) 
+
+tup = ('A', 'B', 'C')
+s = ''.join(tup)
+print( s )
+
+### Cree un programa en Python que dada una lista de tuplas, elimine las tuplas que están vacías.
+
+tuplas= [(),(),('X'),('a','b'),('a','b','c'),('d')]
+print(tuplas)
+print(len(tuplas))
+tuplas = [t for t in tuplas if t]
+print(tuplas)
+print(len(tuplas))
+
+### Cree una funcion en Python que dada una tupla de tuplas con numeros, produzca una tupla con el promedio de cada tupla individual
+import numpy as np
+
+a = np.array([[10, 10, 10, 12], [30, 45, 56, 45], [81,80,39,32]])
+print("Promedio de tuplas: ", np.mean(a, axis=1))
+
+
+### Sistema de Facturas
+
+facturas = {}
+cobrado = 0
+pendiente = 0
+more = ''
+while more != 'T':
+    if more == 'A':
+        clave = input('Introduce el número de la factura: ')
+        coste = float(input('Introduce el coste de la factura: '))
+        facturas[clave] = coste
+        pendiente += coste
+    if more == 'P':
+        clave = input('Introduce el número de la factura a pagar: ')
+        coste = facturas.pop(clave, 0)
+        cobrado += coste
+        pendiente -= coste
+    print('Recaudado:', cobrado)
+    print('Pendiente de cobro: ', pendiente)
+    more = input('¿Quieres añadir una nueva factura (A), pagarla (P) o terminar (T)? ')
+
+2
+
+facturas ={}
+bandera = "s"
+pendiente=0
+cobrado=0
+while "bandera" == "s":
+    op= input ("MENU \n Accion a Realizar: \n1-Agregar Factura\n2-Pagar \n3-Salir\n")
+    
+    if op == "1":
+        numf = int (input("Agregar Factura \nNumero de Factura: \n"))
+        valor = float(input("Importe de Factura: \n"))
+        facturas[numf] = valor
+        pendiente += valor 
+        print("Pendiente: $"+str(pendiente))
+        print("Cobrado el dia de hoy: $"+ str(cobrado)+"\n\n")
+
+    elif op == "2":
+        numf=int(input("PAGAR FACTURA \nEscribe el numero de la factura: \n"))
+        if numf in facturas:
+            pendiente -= facturas [numf]
+            cobrado += facturas[numf]
+        else:
+            print("ERROR: No se encontro la factura")
+            print("Pendiente: $"+str(pendiente))
+            print("Cobrado el dia de hoy: $"+ str(cobrado)+"\n\n")
+    
+    elif op == "3":
+        print("Pendiente: $"+str(pendiente))
+        print("Cobrado el dia de hoy: $"+ str(cobrado)+"\n\n")
+        bandera=="n"
+        
+        ### Haga una función en Python, que cree un set con todas las cartas de una baraja de Pocker utilizando el siguiente formato: Tipo-Numero. Utilice las letras T para tréboles, C para corazones, P para picas y E para espadas
+        
+        import random
+listaFiguras = ["T", "D", "C","P"]
+listaValores = ["01", "02", "03", "04", "05", "06","07","08", "09", "10", "11", "12", "13"]
+baraja=[]
+
+for t in listaFiguras:
+    for p in listaValores:
+        carta="{}{}".format(t,p)
+        baraja.append(carta)
+random.shuffle(baraja)
+for i in range(0,52,4):
+    for j in range(4):
+        print(" {} ".format(baraja[i+j]),end="")
+    print()
+
+#repartir Cartas 
+set1=[]
+set2=[]
+
+for i in range(5):
+    carta1= baraja.pop(0)
+    set1.append(carta1)
+    carta2= baraja.pop(0)
+    set2.append(carta2)
+
+#Mostrar cartas a jugadores
+
+Jugadores = [set1, set2]
+
+for i in range (2):
+    print( "Jugador {}: ".format(i+1))
+    for j in range (5):
+        print ("{:16}".format(Jugadores[i][j]),end="")
+    print()
+print()
+
+
